@@ -38,4 +38,5 @@ public class FoodRecord {
     public String toString() {
         return name + " " + day + " " + amount + " " + note;
     }
-}
+} 
+ 
