@@ -13,7 +13,7 @@ public class JsonWriter {
 
     /* private static final int TAB = 4; */
 
-    private PrintWriter write;
+    private PrintWriter writer;
 
     private String location;
 
