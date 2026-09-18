@@ -1,5 +1,14 @@
 package persistence;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Cafeteria_Food_Sorter.DataEntry.FoodRecordList;
 
 
 
@@ -23,14 +32,40 @@ public class JsonReader {
     throws an IOException if an error occurs during the data retrival  */
 
 
-    public List read() throws IOException {
+    public FoodRecordList read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseList(jsonObject);
+        return parseFoodRecordList(jsonObject);
 
     }
 
+    private String readFile(String source) throws IOException {
+        StringBuilder contentBuilder = new StringBuilder();
 
+        /* File reading input format  */
+        try (Stream<String> stream = Files.lines( Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s));
+        }
+
+        return contentBuilder.toString();
+    }
+
+
+    /*  */
+    private FoodRecordList parseFoodRecordList(JSONObject jsonObject) {
+        FoodRecordList rl = new FoodRecordList();
+        addFoodRecords(rl, jsonObject);
+        return rl;
+    }
+
+    private void addFoodRecords(FoodRecordList rl, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("records");
+        for (Object json : jsonArray) {
+            JSONObject nextFoodrecord = (JSONObject) json;
+            addFoodRecords(rl, nextFoodrecord);
+        }
+
+    }
 
 
 }

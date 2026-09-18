@@ -1,5 +1,8 @@
 package Cafeteria_Food_Sorter.DataEntry;
 
+
+import org.json.JSONObject;
+
 public class FoodRecord {
     private String name;
     private String day;
@@ -37,6 +40,15 @@ public class FoodRecord {
     @Override
     public String toString() {
         return name + " " + day + " " + amount + " " + note;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("day", day);
+        json.put("amount", amount);
+        json.put("note", note);
+        return json; 
     }
 } 
  
