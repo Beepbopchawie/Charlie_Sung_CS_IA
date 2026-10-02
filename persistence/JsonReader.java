@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import Cafeteria_Food_Sorter.DataEntry.FoodRecordList;
-
+import Cafeteria_Food_Sorter.DataEntry.FoodRecord;
 
 
 /* variables
@@ -59,13 +59,24 @@ public class JsonReader {
     }
 
     private void addFoodRecords(FoodRecordList rl, JSONObject jsonObject) {
+        System.out.println(jsonObject.toString());
         JSONArray jsonArray = jsonObject.getJSONArray("records");
         for (Object json : jsonArray) {
             JSONObject nextFoodrecord = (JSONObject) json;
-            addFoodRecords(rl, nextFoodrecord);
+            addFoodRecord(rl, nextFoodrecord);
         }
 
     }
 
+
+
+    private void addFoodRecord(FoodRecordList rl, JSONObject jsonObject){
+        String name = jsonObject.getString("name");
+        String day = jsonObject.getString("day");
+        Integer amount = jsonObject.getInt("amount");
+        String note = jsonObject.getString("note");
+        FoodRecord record = new FoodRecord(name, day, amount, note);
+        rl.addFoodRecord(record);
+    }
 
 }

@@ -33,7 +33,7 @@ public class App {
     public void start() {
         while(true) {
             displayMainMenu();
-            System.out.print("Please input an option");
+            System.out.print("Please input an option: ");
             int option = Integer.parseInt(sc.nextLine());
             if (option == 1) {
                 addInputTask();
@@ -46,10 +46,9 @@ public class App {
             } else if (option == 5) {
                 loadfoodRecordList();
             } else if (option == 6) {
-                break;
+                return;
             } else {
                 System.out.println("Selection was not valid please try again");
-                break;
             } 
         }
     } 
