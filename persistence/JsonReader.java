@@ -51,7 +51,7 @@ public class JsonReader {
     }
 
 
-    /*  */
+    /* Fully debugged  */
     private FoodRecordList parseFoodRecordList(JSONObject jsonObject) {
         FoodRecordList rl = new FoodRecordList();
         addFoodRecords(rl, jsonObject);
