@@ -1,7 +1,4 @@
-This is my 2026-2027 computer science internal assesement project. 
-Under the new 2026 Computer Science HL syllabus. 
-
-Documentation of dates (I had an issue that pushed all of my work into one commit, so heres the development process so far)
+/*
 
 a479f3f | Wed Oct 7 00:42:49 2026 | Save latest CS IA changes
 6cba85d | Thu Oct 1 19:24:19 2026 | Fixed all bugs, one with the saving, loading, and exit button.
@@ -16,3 +13,5 @@ b0df16d | Fri Aug 14 01:39:35 2026 | JsonWriter commit, undefined variables whic
 0cc027d | Thu Aug 13 11:14:33 2026 | Commit 2
 91b4cff | Thu Aug 13 11:09:58 2026 | First commit
 
+
+*/
