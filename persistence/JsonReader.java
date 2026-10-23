@@ -80,3 +80,12 @@ public class JsonReader {
     }
 
 }
+
+
+/*
+
+JSON_STORE = "./data/FoodRecordList.json"
+{"records": [{"name": "Lunch waste", "day": "2026-05-04",
+              "amount": 12.5, "note": "Pizza day"}]}
+
+*/

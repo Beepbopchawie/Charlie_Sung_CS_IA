@@ -4,13 +4,14 @@ import java.util.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import Cafeteria_Food_Sorter.AnalyticsEngine;
 import persistence.Writable;
 
 
 
 
 
-public class FoodRecordList implements Writable {
+public class FoodRecordList implements Writable, AnalyticsEngine {
 
 
 
@@ -61,6 +62,12 @@ public class FoodRecordList implements Writable {
     public List<FoodRecord> getfoodRecordList() {
         return Collections.unmodifiableList(records);
 
+    }
+
+    @Override
+    public int getTotals_weight() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTotals_weight'");
     }
 
 

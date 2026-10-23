@@ -1,4 +1,5 @@
 package Cafeteria_Food_Sorter.DataEntry;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -14,49 +15,55 @@ public class App {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    /* Constructor 
-        | |
-        | |
-        V V
-    */
+    /*
+     * Constructor
+     * | |
+     * | |
+     * V V
+     */
 
-    public App(){
+    public App() {
         foodRecordList = new FoodRecordList();
         sc = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         start();
-        
+
     }
 
-
     public void start() {
-        while(true) {
+        while (true) {
             displayMainMenu();
             System.out.print("Please input an option: ");
-            int option = Integer.parseInt(sc.nextLine());
-            if (option == 1) {
-                addInputTask();
-            } else if (option == 2) {
-                removeInputTask();
-            } else if (option == 3) {
-                displayFoodRecordList();
-            } else if (option == 4) {
-                savefoodRecordList();
-            } else if (option == 5) {
-                loadfoodRecordList();
-            } else if (option == 6) {
-                return;
-            } else {
-                System.out.println("Selection was not valid please try again");
-            } 
+            int option = 0;
+            try {
+                option = Integer.parseInt(sc.nextLine());
+                if (option == 1) {
+                    addInputTask();
+                } else if (option == 2) {
+                    removeInputTask();
+                } else if (option == 3) {
+                    displayFoodRecordList();
+                } else if (option == 4) {
+                    savefoodRecordList();
+                } else if (option == 5) {
+                    loadfoodRecordList();
+                } else if (option == 6) {
+                    return;
+                } else {
+                    System.out.println("Invalid Input, Please enter a number/integer 1 - 6 ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Input, Please enter a number/integer (no decimals)!");
+            }
+
         }
-    } 
+    }
 
     // Saves the foodRecordList to file
 
     private void savefoodRecordList() {
-        try{
+        try {
             jsonWriter.open();
             jsonWriter.write(foodRecordList);
             jsonWriter.close();
@@ -88,14 +95,14 @@ public class App {
 
         System.out.println("Please input a name: ");
         String name = sc.nextLine();
-        
-        System.out.println("Please input a date: ");
+
+        System.out.println("Please input a date [YYYY-MM-DD validation planned]: ");
         String day = sc.nextLine();
 
-        System.out.println("Please input a rounded up weight in ___: ");
+        System.out.println("Please input a rounded up weight (kg): ");
         int amount = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Please input any notes: ");
+        System.out.println("Please input any notes [optional]: ");
         String note = sc.nextLine();
 
         foodRecordList.addFoodRecord(new FoodRecord(name, day, amount, note));
@@ -106,12 +113,22 @@ public class App {
         /* Doesnt do anything right now code, future feature */
     }
 
-    public void displayFoodRecordList(){
+    public void displayFoodRecordList() {
         System.out.println(foodRecordList);
     }
 
-
-
-
-
 }
+
+/*
+ * 
+ * ADD RECORD
+ * name: Lunch waste [existing field]
+ * day: 2026-05-04 [YYYY-MM-DD validation planned]
+ * amount (kg): 12.5 [decimal support planned]
+ * note: Pizza day [optional]
+ * Record added to memory. [planned confirmation]
+ * Use menu 4 to save to JSON. [manual save]
+ * 
+ * Invalid amount: Enter a finite mass of zero or more kg.
+ * amount (kg): [planned re-prompt]
+ */
