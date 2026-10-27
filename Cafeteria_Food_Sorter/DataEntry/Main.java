@@ -12,7 +12,10 @@ public class Main {
 
 /* Future integrations
 
+To do:
+Change the weight integer into a double
+
 Sorting/Searching
 
-Carbon food print API 
+
 */
