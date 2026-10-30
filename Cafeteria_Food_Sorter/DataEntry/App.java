@@ -50,6 +50,10 @@ public class App {
                     loadfoodRecordList();
                 } else if (option == 6) {
                     return;
+                } else if (option == 7) {
+                    showSummaryTask();
+                } else if (option == 8) {
+                    comparePeriodTask();
                 } else {
                     System.out.println("Invalid Input, Please enter a number/integer 1 - 6 ");
                 }
@@ -89,6 +93,8 @@ public class App {
         System.out.println("4. save records");
         System.out.println("5. load records");
         System.out.println("6. exit");
+        System.out.println("7. show summary");
+        System.out.println("8. compare periods");
     }
 
     public void addInputTask() {
@@ -100,7 +106,7 @@ public class App {
         String day = sc.nextLine();
 
         System.out.println("Please input a rounded up weight (kg): ");
-        int amount = Integer.parseInt(sc.nextLine());
+        double amount = Double.parseDouble(sc.nextLine());
 
         System.out.println("Please input any notes [optional]: ");
         String note = sc.nextLine();
@@ -116,6 +122,17 @@ public class App {
     public void displayFoodRecordList() {
         System.out.println(foodRecordList);
     }
+
+    public void showSummaryTask() {
+        /* Do after the AnalyticsEngine */
+        System.out.println(foodRecordList.getTotals_weight());
+    }
+
+    public void comparePeriodTask(){
+        /*do after showSummary */
+    }
+
+
 
 }
 

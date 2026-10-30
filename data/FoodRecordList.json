@@ -1,13 +1,13 @@
 {"records": [
     {
         "note": "tes",
-        "amount": 10,
+        "weight": 10,
         "name": "test",
         "day": "test"
     },
     {
         "note": "none",
-        "amount": 23,
+        "weight": 23.8,
         "name": "test`",
         "day": "test1"
     }

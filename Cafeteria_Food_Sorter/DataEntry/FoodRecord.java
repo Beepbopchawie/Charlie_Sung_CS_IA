@@ -6,14 +6,14 @@ import org.json.JSONObject;
 public class FoodRecord {
     private String name;
     private String day;
-    private int amount;
+    private double weight;
     private String note;
 
 
-    public FoodRecord(String name, String day, int amount, String note) {
+    public FoodRecord(String name, String day, double weight, String note) {
         this.name = name;
         this.day = day;
-        this.amount = amount;
+        this.weight = weight;
         this.note = note;
     }
 
@@ -27,11 +27,11 @@ public class FoodRecord {
         this.day = day;
     }
 
-    public int getAmount() {
-        return amount;
+    public double getWeight() {
+        return weight;
     }
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public String getNote() {return note;}
@@ -39,16 +39,18 @@ public class FoodRecord {
 
     @Override
     public String toString() {
-        return name + " " + day + " " + amount + " " + note;
+        return name + " " + day + " " + weight + " " + note;
     }
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("day", day);
-        json.put("amount", amount);
+        json.put("weight", weight);
         json.put("note", note);
         return json; 
     }
+
+
 } 
  

@@ -4,7 +4,7 @@ import java.util.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Cafeteria_Food_Sorter.AnalyticsEngine;
+import Cafeteria_Food_Sorter.Analytics.AnalyticsEngine;
 import persistence.Writable;
 
 
@@ -28,6 +28,8 @@ public class FoodRecordList implements Writable, AnalyticsEngine {
     public void removeFoodRecord(FoodRecord foodRecord){
         records.remove(foodRecord);
     }
+
+    
 
     @Override
     public String toString() {
@@ -64,10 +66,47 @@ public class FoodRecordList implements Writable, AnalyticsEngine {
 
     }
 
+    // Override because its inherited 
+    @Override 
+    public double getTotals_weight() {
+       double totalWeight = 0;
+       for (FoodRecord record : records) {
+            totalWeight += record.getWeight();
+       }
+        return totalWeight;
+    }
+
+    public String getStartDate() {
+        if(records.isEmpty()) {
+            return null; 
+        }
+        String earliest = records.get(0).getDay();
+        for (FoodRecord record : records) {
+            if(record.getDay().compareTo(earliest) > 0) {
+                earliest = record.getDay();
+            }
+        }
+        return earliest;
+    }
+
+    public String getEndDate() {
+        if (records.isEmpty()) {
+            return null;
+        }
+
+        String latest = records.get(0).getDay();
+        for (FoodRecord record : records) {
+            if (record.getDay().compareTo(latest) > 0) {
+                latest = record.getDay();
+            }
+        }
+        return latest;
+    }
+
     @Override
-    public int getTotals_weight() {
+    public String getSummary() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTotals_weight'");
+        throw new UnsupportedOperationException("Unimplemented method 'getSummary'");
     }
 
 

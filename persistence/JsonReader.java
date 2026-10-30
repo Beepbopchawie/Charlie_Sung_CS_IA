@@ -73,9 +73,9 @@ public class JsonReader {
     private void addFoodRecord(FoodRecordList rl, JSONObject jsonObject){
         String name = jsonObject.getString("name");
         String day = jsonObject.getString("day");
-        Integer amount = jsonObject.getInt("amount");
+        Double weight = jsonObject.getDouble("weight");
         String note = jsonObject.getString("note");
-        FoodRecord record = new FoodRecord(name, day, amount, note);
+        FoodRecord record = new FoodRecord(name, day, weight, note);
         rl.addFoodRecord(record);
     }
 
