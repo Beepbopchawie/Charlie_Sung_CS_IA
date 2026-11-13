@@ -105,8 +105,30 @@ public class FoodRecordList implements Writable, AnalyticsEngine {
 
     @Override
     public String getSummary() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSummary'");
+        if (records.isEmpty()) {
+            return "No food records available.";
+        }
+
+        double totalWeight = 0;
+        String startDate = records.get(0).getDay();
+        String endDate = startDate;
+        for (FoodRecord record : records) {
+            totalWeight += record.getWeight();
+            String day = record.getDay();
+            if (day.compareTo(startDate) < 0) {
+                startDate = day;
+            }
+            if (day.compareTo(endDate) > 0) {
+                endDate = day;
+            }
+        }
+
+        System.out.println("======================");
+
+        return "Records: " + records.size()
+                + "\nTotal weight: " + totalWeight + "kg" 
+                + "\nStart date: " + startDate
+                + "\nEnd date: " + endDate; 
     }
 
 

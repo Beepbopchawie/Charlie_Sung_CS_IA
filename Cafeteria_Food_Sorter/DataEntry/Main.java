@@ -13,9 +13,13 @@ public class Main {
 /* Future integrations
 
 To do:
-Change the weight integer into a double
+
+Fill in the stuff that needs to be filled in 
 
 Sorting/Searching
 
+Make the load output alot more readable
+
+Finish writing the logic to the summary and engine. 
 
 */

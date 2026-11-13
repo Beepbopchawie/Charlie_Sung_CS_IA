@@ -3,6 +3,9 @@ package Cafeteria_Food_Sorter.DataEntry;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.time.LocalDate;
+/* Validates dates */
+import java.time.format.DateTimeParseException;
 
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -99,24 +102,105 @@ public class App {
 
     public void addInputTask() {
 
+        System.out.println("======================");
         System.out.println("Please input a name: ");
         String name = sc.nextLine();
 
-        System.out.println("Please input a date [YYYY-MM-DD validation planned]: ");
-        String day = sc.nextLine();
+        /* Date input with validationn */
+        String day = "";
+        boolean validDate = false;
 
-        System.out.println("Please input a rounded up weight (kg): ");
-        double amount = Double.parseDouble(sc.nextLine());
+        while (!validDate) {
+            System.out.println("Please input a date (YYYY-MM-DD): ");
+            day = sc.nextLine();
+
+            try {
+                LocalDate.parse(day);
+                validDate = true;
+            } catch (DateTimeParseException e) {
+                System.out.println(
+                    "Invalid date. Please enter a real date in YYYY-MM-DD format."
+                );
+            }
+        }
+
+        /* weight input with validation  */
+        double amount = 0;
+        boolean validWeight = false;
+
+        while (!validWeight) {
+            System.out.println("Please input the weight in kg: ");
+
+            try {
+                amount = Double.parseDouble(sc.nextLine());
+
+                if (amount < 0 || !Double.isFinite(amount)) {
+                    System.out.println("Please enter a finite weight of zero or more.");
+                } else {
+                    validWeight = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a number, such as 2.5");
+            }
+        }
 
         System.out.println("Please input any notes [optional]: ");
         String note = sc.nextLine();
 
         foodRecordList.addFoodRecord(new FoodRecord(name, day, amount, note));
+        System.out.println("======================");
     }
 
     public void removeInputTask() {
-        System.out.println("Please input a task title to remove");
-        /* Doesnt do anything right now code, future feature */
+    List<FoodRecord> records = foodRecordList.getfoodRecordList();
+
+    if (records.isEmpty()) {
+        System.out.println("There are no records to remove.");
+        return;
+    }
+
+    /*  Display records with numbers starting at 1. */
+    for (int i = 0; i < records.size(); i++) {
+        System.out.println((i + 1) + ". " + records.get(i));
+    }
+
+    while (true) {
+        System.out.println("Enter a record number to remove, or 0 to cancel:");
+
+        try {
+            int choice = Integer.parseInt(sc.nextLine());
+
+            if (choice == 0) {
+                return;
+            }
+
+            if (choice < 1 || choice > records.size()) {
+                System.out.println("Please choose a number from the list.");
+                continue;
+            }
+
+            FoodRecord selectedRecord = records.get(choice - 1);
+
+            System.out.println("Remove this record?");
+            System.out.println(selectedRecord);
+            System.out.println("Type yes to confirm:");
+
+            String confirmation = sc.nextLine();
+
+            
+            if (confirmation.equalsIgnoreCase("yes")) {
+                foodRecordList.removeFoodRecord(selectedRecord);
+                System.out.println("Record removed. Use option 4 to save.");
+            } else {
+                System.out.println("Removal cancelled.");
+            }
+
+            return;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a whole number.");
+        }
+    }
     }
 
     public void displayFoodRecordList() {
@@ -125,7 +209,8 @@ public class App {
 
     public void showSummaryTask() {
         /* Do after the AnalyticsEngine */
-        System.out.println(foodRecordList.getTotals_weight());
+        System.out.println(foodRecordList.getSummary());
+        System.out.println("======================");
     }
 
     public void comparePeriodTask(){
@@ -133,6 +218,8 @@ public class App {
     }
 
 
+
+    
 
 }
 

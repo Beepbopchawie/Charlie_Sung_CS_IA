@@ -1,0 +1,10 @@
+package Cafeteria_Food_Sorter;
+
+import java.time.LocalDate;
+import java.util.Map;
+
+public class PeriodSummary {
+    private 
+
+    
+}
